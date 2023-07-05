@@ -49,6 +49,33 @@ class Wallet extends MainInitializer {
         }
     }
 
+    async setProviderAndSigner(privateKey, chainId) {
+        // when wallet is connected ideally it will set the provider and signer in the frontend
+        const userRpcUrl = getRpcUrlforChainId(this.blockchainEndpointsIndexed, chainId)
+        const ethers = this.wrappers.ethers
+        const provider = new ethers.providers.JsonRpcProvider(userRpcUrl)
+        const signer = new ethers.Wallet(privateKey, provider);
+        this.connectedProvider = provider
+        this.connectedSigner = signer
+        console.log("Provider and signer set successfully")
+    }
+
+
+    async signMessage(message) {
+        if(!this.connectedProvider && !this.connectedSigner){
+            console.error("Provider and signer not initialized ")
+        }
+        var signature;
+        try {
+            signature = await this.connectedSigner.signMessage(message)
+            return signature
+        } 
+        catch(err) {
+            console.error(err)
+            return 
+        }
+    }
+
 
 
 }

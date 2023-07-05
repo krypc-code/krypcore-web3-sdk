@@ -8,7 +8,7 @@ const logFormat = winston.format.combine(
 );
 
 const logger = winston.createLogger({
-  level: 'error',
+  level: 'info',
   format: logFormat,
   transports: [
     new winston.transports.Console(),
