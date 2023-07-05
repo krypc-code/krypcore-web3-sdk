@@ -11,8 +11,8 @@ function logError(message, error) {
 
 class Wallet extends MainInitializer {
 
-    constructor() {
-        super()
+    constructor(configFilePath) {
+        super(configFilePath)
     }
 
 

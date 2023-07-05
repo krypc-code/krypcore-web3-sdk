@@ -4,11 +4,11 @@ const coreServices = require("./core")
 
 class Web3Engine extends MainInitializer {
 
-    constructor() {
-        const initializer = super()
+    constructor(configFilePath) {
+        const initializer = super(configFilePath)
         if (initializer._initializationStatus) {
             console.log("Package has been successfully initialized")
-            this.Wallet = new coreServices.Wallet()
+            this.Wallet = new coreServices.Wallet(configFilePath)
         }
         else {
             console.log("Initialization of package has failed. ")
