@@ -1,0 +1,74 @@
+{
+  "globalSetting": {
+    "accessDatalake": false,
+    "accessGasless": false,
+    "clientID": "",
+    "sameAPIKey": true
+  },
+  "endpoints": {
+    "BlockchainEndpoint": {
+      "EndpointName": "polygon-mumbai",
+      "Protocol": "polygon-mumbai",
+      "Network": "mumbai",
+      "ID": "BCN_POL_62_20230704",
+      "RPC_URL": "https://polygon-mumbai-dev-node.krypcore.com/api/v0/rpc/a87a18b6-db88-44d3-8e86-9a73c2483090/6a96bc6a-d2e6-4422-aa9b-45469b18a08b"
+    },
+    "StorageEndpoint": {
+      "EndpointName": "IPFS",
+      "Protocol": "IPFS",
+      "Network": "NA",
+      "ID": "SN_IPF_63_20230704",
+      "RPC_URL": "https://ipfs-client-dev-node.krypcore.com/api/v0/ipfs/a87a18b6-db88-44d3-8e86-9a73c2483090/8c595a53-9669-4fa4-8c7c-e19f1b688333",
+      "IPFSGateway_URL": "https://ipfs-gateway-dev-node.krypcore.com/api/v0/ipfs/a87a18b6-db88-44d3-8e86-9a73c2483090/8c595a53-9669-4fa4-8c7c-e19f1b688333"
+    },
+    "DIEndpoint": {
+      "EndpointName": "DID",
+      "Protocol": "DID",
+      "Network": "NA",
+      "ID": "DIDE_DID_64_20230704",
+      "RPC_URL": "https://web3-did-node.krypcore.com/api/v0/did/a87a18b6-db88-44d3-8e86-9a73c2483090/dcd8ba4e-786c-4d07-8232-c03cfe6a23d3"
+    }
+  },
+  "services": {
+    "EasyNFT": {
+      "InstanceID": "INS_EA_22_202374",
+      "ServiceName": "easy-nft",
+      "isRequired": true
+    },
+    "SmartContractStudio": {
+      "InstanceID": "INS_SM_24_202374",
+      "ServiceName": "smart-contract-studio",
+      "isRequired": true
+    },
+    "FT_Manager": {
+      "InstanceID": "INS_FT_24_202374",
+      "ServiceName": "ft-manager",
+      "isRequired": true
+    },
+    "DID_Manager": {
+      "InstanceID": "INS_DI_20_202374",
+      "ServiceName": "did",
+      "isRequired": true
+    },
+    "StorageManager": {
+      "InstanceID": "INS_ST_23_202374",
+      "ServiceName": "storagemanageripfs",
+      "isRequired": true
+    },
+    "CustodialWallet": {
+      "InstanceID": "INS_WA_23_202374",
+      "ServiceName": "wallet",
+      "isRequired": true
+    }
+  },
+  "_id": "64a3c2e1a60439531c66e4b1",
+  "subscriptionId": "a87a18b6-db88-44d3-8e86-9a73c2483090",
+  "maintainerId": "DEV_MOHI_34_20230704",
+  "projectName": "DKYC Platform",
+  "description": "Dkyc",
+  "projectID": "PROJECT31",
+  "token": "8778df36-de57-417e-a860-3ecd40c47012",
+  "createdAt": "2023-07-04T06:57:37.156Z",
+  "updatedAt": "2023-07-04T06:57:37.156Z",
+  "__v": 0
+}
