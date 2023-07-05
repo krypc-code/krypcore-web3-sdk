@@ -6,8 +6,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krypc-code/krypcore-web3-sdk.git"
+  },
+  "keywords": [
+    "web3",
+    "blockchain-development",
+    "dapp",
+    "did",
+    "ipfs"
+  ],
   "author": "krypc",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krypc-code/krypcore-web3-sdk/issues"
+  },
+  "homepage": "https://github.com/krypc-code/krypcore-web3-sdk#readme",
   "dependencies": {
     "@coinbase/wallet-sdk": "3.5.0",
     "@hashgraph/hethers": "^1.2.2",
