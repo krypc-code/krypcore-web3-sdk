@@ -1,14 +1,6 @@
 const MainInitializer = require("../../main")
 const logger = require("../../logger")
 
-function logError(message, error) {
-    logger.error({
-        message,
-        error: error.message,
-        stack: error.stack,
-    });
-}
-
 class Wallet extends MainInitializer {
 
     constructor(configFilePath) {
@@ -16,7 +8,7 @@ class Wallet extends MainInitializer {
     }
 
 
-    async getBalance(address) {
+    async getBalance(address, chainId) {
         const ethers = this.wrappers.ethers;
         const isValidAddress = ethers.utils.isAddress(address);
 
@@ -32,15 +24,27 @@ class Wallet extends MainInitializer {
         }
 
         try {
-            const provider = new ethers.providers.JsonRpcProvider(this.blockchainEndpointUrl);
+            // First need to get RPC URL for given ChainID to perform action
+            const userRpc = this.blockchainEndpointsIndexed[String(chainId)]
+            if(!userRpc) {
+                const errorMessage = {
+                    data: null,
+                    status: 'error',
+                    message: 'Invalid chain ID passed. Please pass correct chain ID or link the endpoint to your project and try again',
+                    error: 'Invalid address passed for balance query',
+                };
+                logger.error(errorMessage)
+                return errorMessage
+            }
+            const userRpcUrl = userRpc.rpcURL
+            const provider = new ethers.providers.JsonRpcProvider(userRpcUrl);
             const balance = await provider.getBalance(address);
 
             const successMessage = {
                 data: balance,
                 status: 'success',
-                message: 'BalanceFetched',
+                message: 'Balance fetched successfully',
             };
-
             logger.info(successMessage); // Log the success message
             return successMessage;
         } catch (error) {
@@ -50,9 +54,15 @@ class Wallet extends MainInitializer {
                 message: 'FetchBalanceFailed',
                 error: error.message,
             };
-            logError(errorMessage.message, error);
+            logger.error(errorMessage)
             return errorMessage;
         }
+    }
+
+    async setProviderAndSigner() {
+        // Sets the provider and signer using ethers.js temporarily using private key and uses the configured RPC URL
+
+
     }
 
 

@@ -5,7 +5,7 @@ const ethers = Web3Engine.wrappers.ethers
 const testProvider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com")
 
 async function test() {
-    const balance = await Web3Engine.Wallet.getBalance("0xE6D5514b8De7ef9E5F5c4cc2E8cA0207129DEB65")
+    const balance = await Web3Engine.Wallet.getBalance("0xE6D5514b8De7ef9E5F5c4cc2E8cA0207129DEB65", 80001)
     console.log(balance)
 }
 

@@ -9,9 +9,10 @@
     "BlockchainEndpoint": {
       "EndpointName": "polygon-mumbai",
       "Protocol": "polygon-mumbai",
+      "chainId": "80001",
       "Network": "mumbai",
       "ID": "BCN_POL_62_20230704",
-      "RPC_URL": "https://polygon-mumbai-dev-node.krypcore.com/api/v0/rpc/a87a18b6-db88-44d3-8e86-9a73c2483090/6a96bc6a-d2e6-4422-aa9b-45469b18a08b"
+      "RPC_URL": "https://rpc.ankr.com/polygon_mumbai"
     },
     "StorageEndpoint": {
       "EndpointName": "IPFS",
