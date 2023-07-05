@@ -1,5 +1,6 @@
 const MainInitializer = require("../../main")
 const { logger, logInfo, logError } = require("../../logger")
+const {getRpcUrlforChainId} = require("../../helpers")
 
 class Wallet extends MainInitializer {
 
@@ -25,18 +26,7 @@ class Wallet extends MainInitializer {
 
         try {
             // First need to get RPC URL for given ChainID to perform action
-            const userRpc = this.blockchainEndpointsIndexed[String(chainId)];
-            if (!userRpc) {
-                const errorMessage = {
-                    data: null,
-                    status: 'error',
-                    message: 'Invalid chain ID passed. Please pass correct chain ID or link the endpoint to your project and try again',
-                    error: 'Invalid address passed for balance query',
-                };
-                logError(errorMessage.message, new Error(errorMessage.error));
-                return errorMessage;
-            }
-            const userRpcUrl = userRpc.rpcURL;
+            const userRpcUrl = getRpcUrlforChainId(this.blockchainEndpointsIndexed, chainId)
             const provider = new ethers.providers.JsonRpcProvider(userRpcUrl);
             const balance = await provider.getBalance(address);
 
@@ -58,14 +48,6 @@ class Wallet extends MainInitializer {
             return errorMessage;
         }
     }
-
-
-    async setProviderAndSigner() {
-        // Sets the provider and signer using ethers.js temporarily using private key and uses the configured RPC URL
-
-
-    }
-
 
 
 

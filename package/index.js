@@ -11,7 +11,7 @@ class Web3Engine extends MainInitializer {
             this.Wallet = new coreServices.Wallet(configFilePath)
         }
         else {
-            console.log("Initialization of package has failed. ")
+            console.log("Initialization of package has failed.")
         }
     }
 
