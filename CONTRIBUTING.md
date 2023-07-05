@@ -41,7 +41,3 @@ If you encounter any bugs or issues while using KrypCore-Web3-SDK, please report
 If you need any assistance or have questions related to KrypCore-Web3-SDK, please reach out to us through Discord.
 
 We appreciate your valuable contributions to KrypCore-Web3-SDK and look forward to building a better SDK together!
-
----
-
-Feel free to customize the template by adding more specific guidelines, instructions, or information relevant to your SDK.
