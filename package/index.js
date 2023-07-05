@@ -1,6 +1,6 @@
 const MainInitializer = require("./main")
-const coreServices = require("./core")
-const {logError, logInfo} = require("./logger")
+const core = require("./core")
+const { logError, logInfo } = require("./logger")
 
 
 class Web3Engine extends MainInitializer {
@@ -9,7 +9,8 @@ class Web3Engine extends MainInitializer {
         const initializer = super(configFilePath)
         if (initializer._initializationStatus) {
             logInfo("Package has been successfully initialized")
-            this.Wallet = new coreServices.Wallet(configFilePath)
+            this.Wallet = new core.Wallet(configFilePath)
+            this.Services = core.Services
         }
         else {
             logError("Initialization of package has failed.")

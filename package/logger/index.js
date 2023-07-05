@@ -32,6 +32,6 @@ function logError(message, error) {
 
 module.exports = {
   logger,
-  logInfo, 
+  logInfo,
   logError
 };

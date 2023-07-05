@@ -1,6 +1,6 @@
 const MainInitializer = require("../../main")
 const { logger, logInfo, logError } = require("../../logger")
-const {getRpcUrlforChainId} = require("../../helpers")
+const { getRpcUrlforChainId } = require("../../helpers")
 
 class Wallet extends MainInitializer {
 
@@ -62,17 +62,17 @@ class Wallet extends MainInitializer {
 
 
     async signMessage(message) {
-        if(!this.connectedProvider && !this.connectedSigner){
+        if (!this.connectedProvider && !this.connectedSigner) {
             console.error("Provider and signer not initialized ")
         }
         var signature;
         try {
             signature = await this.connectedSigner.signMessage(message)
             return signature
-        } 
-        catch(err) {
+        }
+        catch (err) {
             console.error(err)
-            return 
+            return
         }
     }
 

@@ -10,6 +10,11 @@ const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
 const ethers = Web3Engine.wrappers.ethers
 const testProvider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com")
 
+
+// Accessing the Core Service Methods - Kcw3 APIs
+const WalletMgrService = new Web3Engine.Services.WalletManager(configFilePath)
+const StorageMgrService = new Web3Engine.Services.StorageManager(configFilePath)
+
 // Accessing SDK Power Methods
 async function test() {
     const balance = await Web3Engine.Wallet.getBalance("0xE6D5514b8De7ef9E5F5c4cc2E8cA0207129DEB65", 80001)
@@ -17,6 +22,7 @@ async function test() {
     Web3Engine.Wallet.setProviderAndSigner(process.env.PRIVATE_KEY_FOR_TESTING, 80001)
     const signature = await Web3Engine.Wallet.signMessage("hello")
     console.log(signature)
+    WalletMgrService.createWallet()
 }
 
 test()
