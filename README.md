@@ -57,5 +57,4 @@ Please review our [Code of Conduct](CODE_OF_CONDUCT.md) that outlines the expect
 
 ## License
 
-KrypCore Web3 SDK is open-source software licensed under the [MIT License](LICENSE).
-```
+KrypCore Web3 SDK is open-source software licensed under the (LICENSE).
