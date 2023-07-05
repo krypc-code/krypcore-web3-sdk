@@ -8,13 +8,29 @@ class WalletManager extends MainInitializer {
         this.walletMgrUrl = this.apiGatewayBaseUrl + walletMgrContextPath
     }
 
-    async createWallet() {
+    async createWallet(walletName, algorithm) {
         try {
-            console.log(this.walletMgrUrl)
-
+            const apiMethod = 'createWallet'
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': this.userAuthKey,
+                'instanceId': this.walletMgrInstanceId
+            };
+            const data = {
+                algorithm: algorithm,
+                name: walletName,
+            }
+            const options = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(data)
+            };
+            const response = await fetch(this.walletMgrUrl + "/" + apiMethod, options)
+            const responseData = await response.json()
+            return responseData
         }
-        catch(error){
-
+        catch (error) {
+            console.log(error)
         }
     }
 }
