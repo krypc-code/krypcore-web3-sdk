@@ -1,5 +1,5 @@
 const MainInitializer = require("../../main")
-const logger = require("../../logger")
+const { logger, logInfo, logError } = require("../../logger")
 
 class Wallet extends MainInitializer {
 
@@ -25,18 +25,18 @@ class Wallet extends MainInitializer {
 
         try {
             // First need to get RPC URL for given ChainID to perform action
-            const userRpc = this.blockchainEndpointsIndexed[String(chainId)]
-            if(!userRpc) {
+            const userRpc = this.blockchainEndpointsIndexed[String(chainId)];
+            if (!userRpc) {
                 const errorMessage = {
                     data: null,
                     status: 'error',
                     message: 'Invalid chain ID passed. Please pass correct chain ID or link the endpoint to your project and try again',
                     error: 'Invalid address passed for balance query',
                 };
-                logger.error(errorMessage)
-                return errorMessage
+                logError(errorMessage.message, new Error(errorMessage.error));
+                return errorMessage;
             }
-            const userRpcUrl = userRpc.rpcURL
+            const userRpcUrl = userRpc.rpcURL;
             const provider = new ethers.providers.JsonRpcProvider(userRpcUrl);
             const balance = await provider.getBalance(address);
 
@@ -45,19 +45,20 @@ class Wallet extends MainInitializer {
                 status: 'success',
                 message: 'Balance fetched successfully',
             };
-            logger.info(successMessage); // Log the success message
+            logInfo(successMessage.message, successMessage); // Log the success message
             return successMessage;
         } catch (error) {
             const errorMessage = {
                 data: null,
                 status: 'error',
-                message: 'FetchBalanceFailed',
+                message: 'Failed to fetch balance',
                 error: error.message,
             };
-            logger.error(errorMessage)
+            logError(errorMessage.message, error);
             return errorMessage;
         }
     }
+
 
     async setProviderAndSigner() {
         // Sets the provider and signer using ethers.js temporarily using private key and uses the configured RPC URL
