@@ -17,7 +17,7 @@ async function testWalletManagerMethods() {
     console.log(WalletCreationStatus)
 
     // Create and execute txn
-    const txStatus = await WalletMgrService.createAndExecuteTx(80001, "0xE396a584D29036c44c138E98072341C4174778BD", JSON.stringify(sampleAbi), true, "mintNFT", "27b0b01c-ada9-4a55-9331-83e5b22d18ab", 0, [])
+    const txStatus = await WalletMgrService.createAndExecuteTx(80001, "creds",'DKYC Platform Wallet', "0xE396a584D29036c44c138E98072341C4174778BD", JSON.stringify(sampleAbi), true, "mintNFT", "27b0b01c-ada9-4a55-9331-83e5b22d18ab", 0, [])
     console.log(txStatus)
 
     // Get All Wallets
@@ -27,6 +27,10 @@ async function testWalletManagerMethods() {
     // Get specific wallet
     const myWalletDetails = await WalletMgrService.getWallet('DKYC Platform Wallet')
     console.log(myWalletDetails)
+
+    // Get balance API
+    const walletBalanceDetails = await WalletMgrService.getBalance('DKYC Platform Wallet')
+    console.log(walletBalanceDetails)
 
 }
 
