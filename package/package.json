@@ -1,6 +1,6 @@
 {
-  "name": "krypcore-web3-sdk",
-  "version": "1.0.0",
+  "name": "@krypc/krypcore-web3-sdk",
+  "version": "1.0.1",
   "description": "Krypcore Web3 SDK that enables you to build web3 applications seamlessly. Build, Deploy, Manage and Scale with KrypCore Web3. ",
   "main": "index.js",
   "scripts": {

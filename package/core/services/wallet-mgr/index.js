@@ -68,7 +68,7 @@ class WalletManager extends MainInitializer {
 
     }
 
-    async getAllWallets(){
+    async getAllWallets() {
         try {
             const apiMethod = 'getAllWallets'
             const headers = {
@@ -92,7 +92,7 @@ class WalletManager extends MainInitializer {
         }
     }
 
-    async getWallet(walletName){
+    async getWallet(walletName) {
         try {
             const apiMethod = 'getWallet'
             const headers = {

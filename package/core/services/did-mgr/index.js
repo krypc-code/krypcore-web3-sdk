@@ -14,7 +14,7 @@ class DidManager extends MainInitializer {
             const apiMethod = 'createIssuerProfile'
 
         }
-        catch(error){
+        catch (error) {
 
         }
     }

@@ -16,7 +16,7 @@ class StorageManager extends MainInitializer {
 
         }
 
-        catch(error){
+        catch (error) {
 
         }
     }
