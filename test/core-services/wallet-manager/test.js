@@ -90,17 +90,8 @@ async function testWalletManagerMethods() {
     // console.log(signTxStatus)
 
     // Deploy contract API
-    // const deployContractParams = [
-    //     {
-    //         "type": "string",
-    //         "value": "test collection"
-    //     },
-    //     {
-    //         "type": "string",
-    //         "value": "TEST"
-    //     }
-    // ]
-    // const deployContractStatus = await WalletMgrService.deployContract(80001, sampleAbiBase64, sampleBytecode, process.env.WALLET_ACCESS_TOKEN, JSON.stringify(deployContractParams))
+    // const deployContractParams = ["Test Collection", "TEST"]
+    // const deployContractStatus = await WalletMgrService.deployContract(80001, sampleAbiBase64, sampleBytecode, process.env.WALLET_ACCESS_TOKEN, deployContractParams)
     // console.log(deployContractStatus)
 
     // const signAndExecuteTxApiStatus = await WalletMgrService.signAndExecuteTx(80001, unsignedTransaction, process.env.WALLET_ACCESS_TOKEN)
