@@ -176,6 +176,87 @@ class WalletManager extends MainInitializer {
         }
     }
 
+    async getTxHistory(chainId, walletAccessToken){
+        try {
+            const apiMethod = 'listWalletTxnsByChainId'
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': this.userAuthKey,
+                'instanceId': this.walletMgrInstanceId
+            };
+            const data = {
+                mode: "api",
+                chainId: String(chainId),
+                serviceAPIKey: walletAccessToken,
+            }
+            const options = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(data)
+            };
+            const response = await fetch(this.walletMgrUrl + "/" + apiMethod, options)
+            const responseData = await response.json()
+            return responseData
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async signMessage(message, walletAccessToken){
+        try {
+            const apiMethod = 'signMessage'
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': this.userAuthKey,
+                'instanceId': this.walletMgrInstanceId
+            };
+            const data = {
+                mode: "api",
+                message: message,
+                serviceAPIKey: walletAccessToken,
+            }
+            const options = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(data)
+            };
+            const response = await fetch(this.walletMgrUrl + "/" + apiMethod, options)
+            const responseData = await response.json()
+            return responseData
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async signTxHash(txHash, walletAccessToken){
+        try {
+            const apiMethod = 'signTxHash'
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': this.userAuthKey,
+                'instanceId': this.walletMgrInstanceId
+            };
+            const data = {
+                mode: "api",
+                txnHash: txHash,
+                serviceAPIKey: walletAccessToken,
+            }
+            const options = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(data)
+            };
+            const response = await fetch(this.walletMgrUrl + "/" + apiMethod, options)
+            const responseData = await response.json()
+            return responseData
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
 }
 
 module.exports = WalletManager
