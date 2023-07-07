@@ -34,7 +34,7 @@ class WalletManager extends MainInitializer {
         }
     }
 
-    async createAndExecuteTx(chainId, mode, name, contractAddress, contractAbi, isContractTx, method, walletAccessToken, value, params) {
+    async createAndExecuteTx(chainId, contractAddress, contractAbi, isContractTx, method, walletAccessToken, value, params) {
         try {
             const apiMethod = 'createAndExecuteTx'
             const headers = {
@@ -42,35 +42,16 @@ class WalletManager extends MainInitializer {
                 'Authorization': this.userAuthKey,
                 'instanceId': this.walletMgrInstanceId
             };
-            var data;
-            if(mode=="api"){
-                 data = {
-                    mode: mode,
-                    chainId: chainId,
-                    to: contractAddress,
-                    contractABI: contractAbi,
-                    isContractTxn: isContractTx,
-                    method: method,
-                    serviceAPIKey: walletAccessToken,
-                    params: params,
-                    value: value
-                }
-            }
-            else if(mode == "creds"){
-                data = {
-                    mode: mode,
-                    chainId: chainId,
-                    to: contractAddress,
-                    contractABI: contractAbi,
-                    isContractTxn: isContractTx,
-                    method: method,
-                    params: params,
-                    value: value,
-                    name: name
-                }
-            }
-            else{
-                throw new Error("Invalid mode attribute passed")
+            const data = {
+                mode: "api",
+                chainId: chainId,
+                to: contractAddress,
+                contractABI: contractAbi,
+                isContractTxn: isContractTx,
+                method: method,
+                serviceAPIKey: walletAccessToken,
+                params: params,
+                value: value
             }
             const options = {
                 method: 'POST',
@@ -149,6 +130,37 @@ class WalletManager extends MainInitializer {
             const data = {
                 mode: "creds",
                 name: walletName
+            }
+            const options = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(data)
+            };
+            const response = await fetch(this.walletMgrUrl + "/" + apiMethod, options)
+            const responseData = await response.json()
+            return responseData
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async callContract(chainId, contractAddress, contractAbi, method, params, walletAccessToken) {
+        try {
+            const apiMethod = 'callContract'
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': this.userAuthKey,
+                'instanceId': this.walletMgrInstanceId
+            };
+            const data = {
+                mode: "api",
+                chainId: chainId,
+                serviceAPIKey: walletAccessToken,
+                to: contractAddress,
+                contractABI: contractAbi,
+                method: method,
+                params: params
             }
             const options = {
                 method: 'POST',
