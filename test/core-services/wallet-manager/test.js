@@ -8,7 +8,6 @@ const typedData = require("./resources/typedData")
 
 // SDK Initialization
 const krypcore_web3_sdk = require("krypcore-web3-sdk")
-const { sign } = require('crypto')
 const configFilePath = '../../config.json'
 const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
 const ethers = Web3Engine.wrappers.ethers

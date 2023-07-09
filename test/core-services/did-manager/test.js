@@ -12,11 +12,11 @@ const DidManagerService = new Web3Engine.Services.DidManager(configFilePath)
 async function testDidManagerMethods() {
 
     // Create issuer profile
-    const issuerProfileCreationStatus = await DidManagerService.createIssuerProfile("Bharath", "Hello", "Desig", "key")
+    const issuerProfileCreationStatus = await DidManagerService.createIssuerProfile("Bharathq", "Hello", "Desig", "key")
     console.log(issuerProfileCreationStatus)
 
     // Create subject profile
-    const subjectProfileCreationStatus = await DidManagerService.createSubjectProfile("nick@krypc.com", "nick", "desc", "key")
+    const subjectProfileCreationStatus = await DidManagerService.createSubjectProfile("nick@krypqc.com", "nick", "desc", "key")
     console.log(subjectProfileCreationStatus)
 
     // resolve DID to its document
