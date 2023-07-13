@@ -1,15 +1,6 @@
 const MainInitializer = require("../../main")
 const { logger, logInfo, logError } = require("../../logger")
-const { getRpcUrlforChainId } = require("../../helpers")
-
-class CustomError extends Error {
-    constructor(message, error) {
-      super(message);
-      this.name = 'CustomError';
-      this.error = error;
-    }
-  }
-  
+const { CustomError, getRpcUrlforChainId } = require("../../helpers")
 
 class Wallet extends MainInitializer {
 
@@ -29,7 +20,7 @@ class Wallet extends MainInitializer {
                 message: 'Invalid Address',
                 error: 'Invalid address passed for balance query',
             };
-            logError(errorMessage.message, new Error(errorMessage.error));
+            logError(errorMessage.message, errorMessage.error);
             throw new CustomError(errorMessage.message, errorMessage.error);
         }
 
@@ -53,8 +44,9 @@ class Wallet extends MainInitializer {
                 message: 'Failed to fetch balance',
                 error: error.message,
             };
+            console.error(error)
             logError(errorMessage.message, error);
-            return errorMessage;
+            throw new CustomError(errorMessage.message, errorMessage.error);;
         }
     }
 

@@ -25,8 +25,7 @@ function logInfo(message, data = {}) {
 function logError(message, error) {
   logger.error({
     message,
-    error: error.message,
-    stack: error.stack,
+    error: error,
   });
 }
 

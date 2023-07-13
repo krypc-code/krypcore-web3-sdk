@@ -5,3 +5,4 @@ logs
 .vscode
 .DS_Store
 .DS_Store
+test/config.json

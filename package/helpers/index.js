@@ -1,6 +1,16 @@
 const fs = require('fs');
 const { logger, logError, logInfo } = require("../logger")
 
+class CustomError extends Error {
+    constructor(message, error) {
+      super(message);
+      this.name = 'CustomError';
+      this.message = message
+      this.error = error;
+      Error.captureStackTrace(this, CustomError);
+    }
+}
+  
 function readConfigFile(configFilePath) {
     try {
         const configFile = fs.readFileSync(configFilePath);
@@ -70,5 +80,6 @@ module.exports = {
     readConfigFile,
     findAllBlockchainEndpoints,
     returnEndpointIndexedList,
-    getRpcUrlforChainId
+    getRpcUrlforChainId,
+    CustomError
 }

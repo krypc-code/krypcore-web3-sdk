@@ -1,5 +1,6 @@
 const MainInitializer = require("../../../main")
 const { logError, logInfo } = require("../../../logger")
+const { CustomError } = require("../../../helpers")
 
 class WalletManager extends MainInitializer {
     constructor(configFilePath) {
@@ -30,7 +31,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -63,7 +64,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
 
     }
@@ -88,7 +89,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -114,7 +115,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
 
     }
@@ -141,7 +142,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -172,7 +173,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -199,7 +200,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -226,7 +227,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -253,7 +254,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -281,7 +282,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -309,7 +310,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
@@ -340,7 +341,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
 
     }
@@ -368,7 +369,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
 
     }
@@ -397,7 +398,7 @@ class WalletManager extends MainInitializer {
             return responseData
         }
         catch (error) {
-            console.log(error)
+            throw new CustomError(error.message, error.error);
         }
     }
 
