@@ -29,14 +29,7 @@ class Wallet extends MainInitializer {
             const userRpcUrl = getRpcUrlforChainId(this.blockchainEndpointsIndexed, chainId)
             const provider = new ethers.providers.JsonRpcProvider(userRpcUrl);
             const balance = await provider.getBalance(address);
-
-            const successMessage = {
-                data: balance,
-                status: 'success',
-                message: 'Balance fetched successfully',
-            };
-            logInfo(successMessage.message, successMessage); // Log the success message
-            return successMessage;
+            return balance
         } catch (error) {
             const errorMessage = {
                 data: null,
@@ -46,7 +39,7 @@ class Wallet extends MainInitializer {
             };
             console.error(error)
             logError(errorMessage.message, error);
-            throw new CustomError(errorMessage.message, errorMessage.error);;
+            throw new CustomError(errorMessage.message, errorMessage.error)
         }
     }
 
@@ -59,22 +52,100 @@ class Wallet extends MainInitializer {
         this.connectedProvider = provider
         this.connectedSigner = signer
         console.log("Provider and signer set successfully")
+        return {provider, signer}
     }
 
 
     async signMessage(message) {
-        if (!this.connectedProvider && !this.connectedSigner) {
-            console.error("Provider and signer not initialized ")
-        }
         var signature;
+        if (!this.connectedProvider && !this.connectedSigner) {
+            throw new CustomError("Provider and signer not initialized", "Invalid signer")
+        }
         try {
             signature = await this.connectedSigner.signMessage(message)
             return signature
         }
         catch (err) {
-            console.error(err)
-            return
+            throw new CustomError(err.message, err.error)
         }
+    }
+
+    async getConnectedChainId(){
+        if (!this.connectedProvider && !this.connectedSigner) {
+            throw new CustomError("Provider and signer not initialized", "Invalid signer")
+        }
+        try {
+            const network = await this.connectedProvider.getNetwork()
+            return network.chainId
+        }
+        catch(error){
+            throw new CustomError(error.message, error.error)
+        }
+    }
+
+    async getConnectedChainName(){
+        if (!this.connectedProvider && !this.connectedSigner) {
+            throw new CustomError("Provider and signer not initialized", "Invalid values passed")
+        }
+        try {
+            const network = await this.connectedProvider.getNetwork()
+            return network.name
+        }
+        catch(error){
+            throw new CustomError(error.message, error.error)
+        }
+    }
+
+    async switchNetwork(chainId){
+        if (!this.connectedProvider && !this.connectedSigner) {
+            throw new CustomError("Provider and signer not initialized", "Invalid values passed")
+        }
+        const network = await this.connectedProvider.getNetwork()
+        if(network.chainId == chainId){
+            throw new CustomError("Already on the desired network", "Already on the desired network")
+        }
+        else{
+            try{
+                await this.connectedProvider.provider.request({
+                    method: "wallet_switchEthereumChain",
+                    params: [{ chainId: `0x${chainId.toString(16)}` }]
+                  });
+                return true
+            }
+            catch(switchError){
+                if(switchError.code == 4902){
+                    throw new CustomError("Network not present in wallet", switchError)
+                }
+                else{
+                    console.log(switchError)
+                    throw new CustomError("Error in switching network", switchError)
+                }
+            }
+        }
+    }
+
+    async transfer(receiver_address, transfer_amount) {
+        if (!this.connectedProvider && !this.connectedSigner) {
+            throw new CustomError("Provider and signer not initialized", "Invalid values passed")
+        }
+        const ethers = this.wrappers.ethers;
+        var isValidAddress =  ethers.utils.isAddress(receiver_address)
+        if (!isValidAddress) {
+            throw new CustomError("invalid address passed", "Invalid address passed for transfer");
+        }
+        var tx
+        try{
+            tx = await this.connectedSigner.sendTransaction({
+                to: receiver_address,
+                value: transfer_amount
+             })
+            return tx.hash
+        }
+
+        catch(err){
+            throw new CustomError(err.message, err.error)
+        }
+
     }
 
 

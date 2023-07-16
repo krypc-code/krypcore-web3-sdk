@@ -10,7 +10,7 @@ class MainInitializer {
       var blockchainEndpoints = findAllBlockchainEndpoints(config.endpoints);
       var blockchainEndpointsIndexed = returnEndpointIndexedList(blockchainEndpoints);
       this.apiGatewayBaseUrl = 'https://web3-proxy-dev.krypcore.com'
-      this.userAuthKey = config.subscriptionId + "_" + config.token;
+      this.userAuthKey = config.token;
       this.walletMgrInstanceId = config.services.CustodialWallet.InstanceID;
       this.easyNftInstanceId = config.services.EasyNFT.InstanceID;
       this.ftManagerInstanceId = config.services.FT_Manager.InstanceID;

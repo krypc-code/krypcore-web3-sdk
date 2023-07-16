@@ -1,0 +1,80 @@
+{
+  "globalSetting": {
+    "accessDatalake": false,
+    "accessGasless": false,
+    "clientID": "",
+    "sameAPIKey": true
+  },
+  "endpoints": {
+    "BlockchainEndpoint": {
+      "EndpointName": "polygon-mumbai",
+      "Protocol": "polygon-mumbai",
+      "chainId": "80001",
+      "Network": "mumbai",
+      "ID": "BCN_POL_20_20230713",
+      "RPC_URL": "https://polygon-mumbai-dev-node.krypcore.com/api/v0/rpc?subId=7430899299&apiKey=437facb3-55bc-4fad-920d-237bd529faee&token=f2333568-e015-4355-8de7-2a6e5df074be"
+    },
+    "StorageEndpoint": {
+      "EndpointName": "IPFS",
+      "Protocol": "IPFS",
+      "Network": "NA",
+      "ID": "SN_IPF_31_20230714",
+      "RPC_URL": "https://ipfs-client-dev-node.krypcore.com/api/v0/ipfs?subId=7430899299&apiKey=7a1306c5-2044-4763-93e0-dbab4d73b63a&token=f2333568-e015-4355-8de7-2a6e5df074be",
+      "IPFSGateway_URL": "https://ipfs-gateway-dev-node.krypcore.com/api/v0/ipfs?subId=7430899299&apiKey=7a1306c5-2044-4763-93e0-dbab4d73b63a&token=f2333568-e015-4355-8de7-2a6e5df074be"
+    },
+    "DIEndpoint": {
+      "EndpointName": "DID",
+      "Protocol": "DID",
+      "Network": "NA",
+      "ID": "DIDE_DID_32_20230714",
+      "RPC_URL": "https://web3-did-node.krypcore.com/api/v0/did?subId=7430899299&apiKey=a5840702-fe2e-4afa-aef2-484173b1cd2c&token=f2333568-e015-4355-8de7-2a6e5df074be"
+    }
+  },
+  "services": {
+    "EasyNFT": {
+      "InstanceID": "INS_EA_11_2023714",
+      "ServiceName": "easy-nft",
+      "isRequired": true
+    },
+    "SmartContractStudio": {
+      "InstanceID": "INS_SM_11_2023714",
+      "ServiceName": "smart-contract-studio",
+      "isRequired": true
+    },
+    "FT_Manager": {
+      "InstanceID": "INS_FT_12_2023714",
+      "ServiceName": "ft-manager",
+      "isRequired": true
+    },
+    "DID_Manager": {
+      "InstanceID": "INS_DI_7_2023714",
+      "ServiceName": "did",
+      "isRequired": true
+    },
+    "StorageManager": {
+      "InstanceID": "INS_ST_12_2023714",
+      "ServiceName": "storagemanageripfs",
+      "isRequired": true
+    },
+    "CustodialWallet": {
+      "InstanceID": "INS_WA_12_2023714",
+      "ServiceName": "wallet",
+      "isRequired": true
+    },
+    "NonCustodialWallet": {
+      "InstanceID": "INS_NC_11_2023714",
+      "ServiceName": "ncWallet",
+      "isRequired": true
+    }
+  },
+  "_id": "64b0fb94d21861a4ff4ea508",
+  "subscriptionId": "7430899299",
+  "maintainerId": "DEV_BHAR_14_20230713",
+  "projectName": "Sample Project",
+  "description": "Sample 1234",
+  "projectID": "Sample Project_DAVE_13_20230714",
+  "token": "f2333568-e015-4355-8de7-2a6e5df074be",
+  "createdAt": "2023-07-14T07:39:00.945Z",
+  "updatedAt": "2023-07-14T07:39:00.945Z",
+  "__v": 0
+}

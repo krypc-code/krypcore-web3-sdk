@@ -15,28 +15,70 @@ const userRpcUrl = Web3Engine.blockchainEndpointsIndexed['80001'].rpcURL
 // Accessing the Core Service Methods - Kcw3 APIs
 const WalletMgrService = new Web3Engine.Services.WalletManager(configFilePath)
 
+const sampleProvider = new ethers.providers.JsonRpcProvider(userRpcUrl)
+
+async function createUnsignedTransaction(senderAddress, contractAddress, contractAbi, methodName, methodArgs, provider, msgSender) {
+
+    // Get the sender's nonce
+    const nonce = await provider.getTransactionCount(senderAddress);
+
+    // Estimate gas price
+    const gasPrice = await provider.getGasPrice();
+
+    // Create a new contract instance
+    const contract = new ethers.Contract(contractAddress, contractAbi, provider);
+
+    // Estimate gas limit
+    const estimateGasPromise = contract.estimateGas[methodName](...methodArgs, { from: msgSender });
+    const estimatedGas = await estimateGasPromise;
+
+    // Create the transaction object
+    const transaction = {
+        nonce: nonce,
+        gasPrice: gasPrice,
+        gasLimit: estimatedGas.mul(2), // Add some margin for safety
+        to: contractAddress,
+        value: ethers.constants.Zero, // No value to send
+        data: contract.interface.encodeFunctionData(methodName, methodArgs),
+
+    };
+
+    // Convert the transaction to bytes
+    const unsignedTransactionBytes = ethers.utils.arrayify(ethers.utils.serializeTransaction(transaction));
+
+    // Convert the unsigned transaction bytes to Base64
+    const unsignedTransactionBase64 = Buffer.from(unsignedTransactionBytes).toString('base64');
+    return unsignedTransactionBase64;
+
+}
+
 
 async function testWalletManagerMethods() {
 
+    // Sign Tx - Tx is in bytes - WIP
+    // const unsignedTransaction = await createUnsignedTransaction("0xE129D672cE1B741C94f5bffcB003cDf7570Bb2B8", "0xE396a584D29036c44c138E98072341C4174778BD", sampleAbi, "mintNFT", [], sampleProvider, "0xE129D672cE1B741C94f5bffcB003cDf7570Bb2B8")
+    // const signTxStatus = await WalletMgrService.signTx(unsignedTransaction, process.env.WALLET_ACCESS_TOKEN)
+    // console.log(signTxStatus)
+
     // create wallet
-    const WalletCreationStatus = await WalletMgrService.createWallet("sample-test-123456789012", "secp256k1")
-    console.log(WalletCreationStatus)
+    // const WalletCreationStatus = await WalletMgrService.createWallet("sample-test-123456789012", "secp256k1")
+    // console.log(WalletCreationStatus)
 
     // Create and execute txn
-    const txStatus = await WalletMgrService.createAndExecuteTx(80001, "0xE396a584D29036c44c138E98072341C4174778BD", JSON.stringify(sampleAbi), true, "mintNFT", process.env.WALLET_ACCESS_TOKEN, 0, [])
-    console.log(txStatus)
+    // const txStatus = await WalletMgrService.createAndExecuteTx(80001, "0xE396a584D29036c44c138E98072341C4174778BD", JSON.stringify(sampleAbi), true, "mintNFT", process.env.WALLET_ACCESS_TOKEN, 0, [])
+    // console.log(txStatus)
 
     // Get All Wallets
-    const myWallets = await WalletMgrService.getAllWallets()
-    console.log(myWallets)
+    // const myWallets = await WalletMgrService.getAllWallets()
+    // console.log(myWallets)
 
 
     // Get specific wallet details
-    const myWalletDetails = await WalletMgrService.getWallet('sample-test-12345')
+    const myWalletDetails = await WalletMgrService.getWallet(process.env.WALLET_NAME)
     console.log(myWalletDetails)
 
     // Get balance API for getting a wallet's balance
-    const walletBalanceDetails = await WalletMgrService.getBalance('sample-test-12345')
+    const walletBalanceDetails = await WalletMgrService.getBalance(process.env.WALLET_NAME)
     console.log(walletBalanceDetails)
 
     // Call contract view method

@@ -5,9 +5,8 @@ class CustomError extends Error {
     constructor(message, error) {
       super(message);
       this.name = 'CustomError';
-      this.message = message
+      this.ErrorMessage = message
       this.error = error;
-      Error.captureStackTrace(this, CustomError);
     }
 }
   

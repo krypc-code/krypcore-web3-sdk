@@ -31,6 +31,28 @@ async function testDidManagerMethods() {
     const deleteSubjectDidStatus = await DidManagerService.deleteSubjectDid("did:key:z6MkfUupa7JeZcjg44SH86vpHSFVSK3sVNtugwYH77bkJfrs")
     console.log(deleteSubjectDidStatus)
 
+    // list issuer profiles
+    const issuerProfiles = await DidManagerService.listIssuerProfiles(5, 1)
+    console.log(issuerProfiles.Data)
+
+    // list subject profiles
+    const subjectProfiles = await DidManagerService.listSubjectProfiles(5, 1)
+    console.log(subjectProfiles.Data)
+
+    // create vc
+    const vcCreationStatus = await DidManagerService.createVC("did:key:z6MkhnAbbQsrPQGNyHDLNqjt5ywa9cQWwS7bmLzM7seCqtQ4", "did:key:z6MkiAXLfj9beATvYJLy7w2A9z9p63FWAGo7cV79yvQ4aCqd", "LD_PROOF", "StatusList2021Entry")
+    console.log(vcCreationStatus)
+
+    // list vc
+    const listVcStatus = await DidManagerService.listVC(5, 1)
+    console.log(listVcStatus.Data)
+
+    // list vc templates
+    const listVcTemplatesStatus = await DidManagerService.listVCTemplates()
+    console.log(listVcTemplatesStatus)
+
+
+
 }
 
 testDidManagerMethods()
