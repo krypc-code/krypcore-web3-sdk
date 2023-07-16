@@ -12,7 +12,7 @@ async function testEasyNftMethods() {
 
     try {
 
-        const createCollectionStatus  = await EasyNftService.createNFTCollection("ERC721", "80001", "Bored Apes", "APE", process.env.WALLET_ACCESS_TOKEN, "false")
+        const createCollectionStatus  = await EasyNftService.createNFTCollection("ERC721", "80001", "Bored Apes", "Its a nft collection", "APE", process.env.WALLET_ACCESS_TOKEN, false)
         console.log(createCollectionStatus)
 
     }

@@ -10,7 +10,7 @@ class EasyNFT extends MainInitializer {
         this.easyNfturl = this.apiGatewayBaseUrl + easyNftContextPath
     }
 
-    async createNFTCollection(standard, chainId, collectionName, collectionSymbol, custodialWalletAccessToken, isSoulBound) {
+    async createNFTCollection(standard, chainId, collectionName, collectionDescription, collectionSymbol, custodialWalletAccessToken, isSoulBound) {
         try {
             const apiMethod = 'createNFTCollection'
             const headers = {
@@ -22,6 +22,7 @@ class EasyNFT extends MainInitializer {
                 "ERCStandard": standard,
                 "chainId": chainId,
                 "collectionName": collectionName,
+                "collectionDescription": collectionDescription,
                 "collectionSymbol": collectionSymbol,
                 "custodialWalletAccessToken": custodialWalletAccessToken,
                 "isSoulBound": isSoulBound,
