@@ -1,5 +1,6 @@
 const MainInitializer = require("../../../main")
 const { logError, logInfo } = require("../../../logger")
+const { CustomError } = require("../../../helpers")
 
 class EasyNFT extends MainInitializer {
     
@@ -9,12 +10,36 @@ class EasyNFT extends MainInitializer {
         this.easyNfturl = this.apiGatewayBaseUrl + easyNftContextPath
     }
 
-    async createERC721Collection(){
-
-    }
-
-    async createERC1155Collection(){
-
+    async createNFTCollection(standard, chainId, collectionName, collectionSymbol, custodialWalletAccessToken, isSoulBound) {
+        try {
+            const apiMethod = 'createNFTCollection'
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': this.userAuthKey,
+                'instanceId': this.easyNftInstanceId
+            };
+            const data = {
+                "ERCStandard": standard,
+                "chainId": chainId,
+                "collectionName": collectionName,
+                "collectionSymbol": collectionSymbol,
+                "custodialWalletAccessToken": custodialWalletAccessToken,
+                "isSoulBound": isSoulBound,
+                "walletType": "custodial"
+            }
+            const options = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(data)
+            };
+            console.log(this.easyNfturl+"/"+apiMethod)
+            const response = await fetch(this.easyNfturl + "/" + apiMethod, options)
+            const responseData = await response.json()
+            return responseData
+        }
+        catch (error) {
+            throw new CustomError(error.message, error.error);
+        }
     }
 
     async mintNFT(){
