@@ -4,6 +4,7 @@ require('dotenv').config()
 const krypcore_web3_sdk = require("krypcore-web3-sdk")
 const configFilePath = '../../config.json'
 const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
+const ethers = Web3Engine.wrappers.ethers
 
 // Accessing SDK Power Methods
 async function testPowerMethods() {
@@ -17,8 +18,12 @@ async function testPowerMethods() {
         const accountAddress = await signer.getAddress()
         console.log(accountAddress)
 
-        const signature = await Web3Engine.Wallet.signMessage("hello")
+        const message = "Hello World"
+        const signature = await Web3Engine.Wallet.signMessage(message)
         console.log(signature)
+
+        const verifySignatureStatus = await Web3Engine.Wallet.verifySignatureOffChain(message, signature, accountAddress)
+        console.log(verifySignatureStatus)
 
         const chainId = await Web3Engine.Wallet.getConnectedChainId()
         console.log(chainId)

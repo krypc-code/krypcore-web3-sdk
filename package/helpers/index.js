@@ -35,7 +35,7 @@ function findAllBlockchainEndpoints(endpoints) {
                     protocol: endpoint.Protocol,
                     network: endpoint.Network,
                     rpcURL: endpoint.RPC_URL,
-                    chainId: endpoint.chainId
+                    chainId: endpoint.ChainId
                 });
             }
         }

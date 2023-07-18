@@ -6,7 +6,7 @@ const sampleBytecode = require("./resources/bytecode")
 const typedData = require("./resources/typedData")
 
 // SDK Initialization
-const krypcore_web3_sdk = require("krypcore-web3-sdk")
+const krypcore_web3_sdk = require("@krypc/krypcore-web3-sdk")
 const configFilePath = '../../config.json'
 const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
 const ethers = Web3Engine.wrappers.ethers
@@ -63,51 +63,74 @@ async function testWalletManagerMethods() {
         // console.log(signTxStatus)
 
         // create wallet
-        // const WalletCreationStatus = await WalletMgrService.createWallet("sample-test-123456789012", "secp256k1")
-        // console.log(WalletCreationStatus)
+        const WalletCreationStatus = await WalletMgrService.createWallet("sample-test-123456789012", "secp256k1")
+        console.log("Create Wallet Response:")
+        console.log(WalletCreationStatus)
+        console.log()
+
+        
 
         // Create and execute txn
-        // const txStatus = await WalletMgrService.createAndExecuteTx(80001, "0xE396a584D29036c44c138E98072341C4174778BD", JSON.stringify(sampleAbi), true, "mintNFT", process.env.WALLET_ACCESS_TOKEN, 0, [])
-        // console.log(txStatus)
+        const txStatus = await WalletMgrService.createAndExecuteTx(80001, "0xE396a584D29036c44c138E98072341C4174778BD", JSON.stringify(sampleAbi), true, "mintNFT", process.env.WALLET_ACCESS_TOKEN, 0, [])
+        console.log("Create and Execute Tx Response")
+        console.log(txStatus)
+        console.log()
 
         // Get All Wallets
-        // const myWallets = await WalletMgrService.getAllWallets()
-        // console.log(myWallets)
+        const myWallets = await WalletMgrService.getAllWallets()
+        console.log("Get all wallets response")
+        console.log(myWallets)
+        console.log()
 
 
         // Get specific wallet details
-        const myWalletDetails = await WalletMgrService.getWallet('Test Wallet')
+        const myWalletDetails = await WalletMgrService.getWallet(process.env.WALLET_NAME)
+        console.log("Get specific wallet response")
         console.log(myWalletDetails)
+        console.log()
 
-        return
 
         // Get balance API for getting a wallet's balance
         const walletBalanceDetails = await WalletMgrService.getBalance(process.env.WALLET_NAME)
+        console.log("Get balance api response")
         console.log(walletBalanceDetails)
+        console.log()
 
         // Call contract view method
         const callContractStatus = await WalletMgrService.callContract(80001, "0xE396a584D29036c44c138E98072341C4174778BD", JSON.stringify(sampleAbi), "owner", [], process.env.WALLET_ACCESS_TOKEN)
+        console.log("Call contract view method response")
         console.log(callContractStatus)
+        console.log()
 
         // Get Tx History
         const txHistoryStatus = await WalletMgrService.getTxHistory(80001, process.env.WALLET_ACCESS_TOKEN)
+        console.log("Get tx history response")
         console.log(txHistoryStatus)
+        console.log()
 
         // Sign Message
         const signMessageStatus = await WalletMgrService.signMessage("Hello there", process.env.WALLET_ACCESS_TOKEN)
+        console.log("Sign message response")
         console.log(signMessageStatus)
+        console.log()
 
         // Sign Tx Hash 
         const signTxHashStatus = await WalletMgrService.signTxHash("0x157755d6d077c508b02526308399d14b8c4e731849bcf81c51936405139d701f", process.env.WALLET_ACCESS_TOKEN)
+        console.log("Sign tx hash response")
         console.log(signTxHashStatus)
+        console.log()
 
         // Verify signature
         const verifySignatureStatus = await WalletMgrService.verifySignatureOffChain("Hello there", "0x00e6ec512a9496c9ecb63cb0875f2357e5e0e4e7f3b5741bac9ac0f8e17a17df538b66bde141e083bf6ef0bc74129b6295e72bce792755a9a5937bd7ef35053701", process.env.WALLET_ACCESS_TOKEN)
+        console.log("Verify signature response")
         console.log(verifySignatureStatus)
+        console.log()
 
         // Sign Typed Data API
         const signTypedDataStatus = await WalletMgrService.signEip712TypedData(JSON.stringify(typedData), process.env.WALLET_ACCESS_TOKEN)
+        console.log("Sign typed data response")
         console.log(signTypedDataStatus)
+        console.log()
 
         // Deploy contract API
         const deployContractParams = ["Test Collection", "TEST"]

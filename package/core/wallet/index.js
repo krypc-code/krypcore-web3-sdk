@@ -148,6 +148,21 @@ class Wallet extends MainInitializer {
 
     }
 
+    async verifySignatureOffChain(message, signature, signerAddress){
+        try {
+            const ethers = this.wrappers.ethers;
+            const messageHash = ethers.utils.hashMessage(message);
+            const messageHashBytes = ethers.utils.arrayify(messageHash);
+            let recovered = ethers.utils.recoverAddress(messageHashBytes, signature);
+            return recovered == signerAddress
+        }
+        catch(err){
+            throw new CustomError(err.message, err.error)
+        }
+    }
+
+
+
 
 
 }
