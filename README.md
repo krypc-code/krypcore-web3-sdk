@@ -29,14 +29,13 @@ npm install krypcore-web3-sdk
 
 ```javascript
 // Import the KrypCore Web3 SDK
-const { Web3Engine } = require('krypcore-web3-sdk');
+const krypcore_web3_sdk = require("krypcore-web3-sdk")
 
-// Initialize the SDK with your configuration
-const web3 = new Web3Engine({ configPath: 'path/to/config.json' });
+// Specify path to config file
+const configFilePath = '../../config.json'
 
-// Use SDK methods to interact with blockchain and services
-const balance = await web3.Wallet.getBalance('0x123456789...');
-console.log('Balance:', balance);
+// Initialize the SDK with the config file
+const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
 ```
 
 ## Configuration
