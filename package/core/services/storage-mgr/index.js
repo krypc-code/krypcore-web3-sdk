@@ -11,6 +11,7 @@ class StorageManager extends MainInitializer {
     } 
 
     async uploadFile(file) {
+        const fileBlob = new Blob([file]);
         try {
             console.log("In upload file API")
             const apiMethod = 'storefile'
@@ -19,8 +20,7 @@ class StorageManager extends MainInitializer {
                 'Instanceid': this.storageManagerInstanceId
             };
             const formData = new FormData()
-            formData.append("files", file, file.name),
-            formData.append("instanceID", this.storageManagerInstanceId)
+            formData.append("files", fileBlob)
 
             const options = {
                 method: 'POST',
@@ -28,6 +28,7 @@ class StorageManager extends MainInitializer {
                 body: formData,
             };
             const response = await fetch(this.storageMgrUrl + "/" + apiMethod, options)
+            console.log(this.storageMgrUrl + "/" + apiMethod)
             const responseData = await response.json()
             return responseData
         }
@@ -66,3 +67,4 @@ class StorageManager extends MainInitializer {
 }
 
 module.exports = StorageManager
+

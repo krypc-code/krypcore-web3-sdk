@@ -3,8 +3,8 @@ const fs = require('fs');
 require('dotenv').config()
 
 // SDK Initialization
-const krypcore_web3_sdk = require("krypcore-web3-sdk")
-const configFilePath = './test/config.json'
+const krypcore_web3_sdk = require("@krypc/krypcore-web3-sdk")
+const configFilePath = '../../config.json'
 
 const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
 
@@ -12,9 +12,12 @@ const StorageMgrService = new Web3Engine.Services.StorageManager(configFilePath)
 
 async function testStorageManagerMethods() {
 
+
+    const fileStream = fs.readFileSync("./resources/test.jpeg")
     // Testing Upload File API
-    // const testUploadFileStatus = await StorageMgrService.testUploadFile("/Users/bharath/Desktop/KrypC/krypcore-web3-sdk/test/core-services/storage-manager/resources/test.jpeg")
-    // console.log(testUploadFileStatus)
+    const testUploadFileStatus = await StorageMgrService.uploadFile(fileStream)
+    console.log(testUploadFileStatus)
+    
 
     // Testing Get File API
     const getFileDetailsStatus = await StorageMgrService.getFileDetails(1, 5)
