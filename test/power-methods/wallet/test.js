@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 // SDK Initialization
-const krypcore_web3_sdk = require("krypcore-web3-sdk")
+const krypcore_web3_sdk = require("@krypc/krypcore-web3-sdk")
 const configFilePath = '../../config.json'
 const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
 const ethers = Web3Engine.wrappers.ethers
