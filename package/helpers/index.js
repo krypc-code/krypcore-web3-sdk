@@ -1,4 +1,3 @@
-const fs = require('fs');
 const { logger, logError, logInfo } = require("../logger")
 
 class CustomError extends Error {
@@ -9,17 +8,32 @@ class CustomError extends Error {
       this.error = error;
     }
 }
-  
-function readConfigFile(configFilePath) {
+
+async function getDappConfig(userAuthKey, dappId){
+    const apiGatewayBaseUrl  = 'https://api-beta.krypcore.com'
     try {
-        const configFile = fs.readFileSync(configFilePath);
-        const config = JSON.parse(configFile);
-        return config;
-    } catch (error) {
-        // Log the error with 'error' level
-        logError('Error while reading config file:', error);
-        throw new Error("Config file not present. Download the config file from the project screen and try again.");
+        const apiMethod = 'findMyProject'
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': userAuthKey
+        };
+        const data = {
+            "projectId": dappId
+        }
+        const options = {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data)
+        };
+        const response = await fetch(apiGatewayBaseUrl + "/api/v0/" + apiMethod, options)
+        const responseData = await response.json()
+        const dappConfigData = responseData.Data
+        return dappConfigData
     }
+    catch (error) {
+        throw new CustomError(error.message, error.error);
+    }
+
 }
 
 function findAllBlockchainEndpoints(endpoints) {
@@ -63,22 +77,21 @@ function getRpcUrlforChainId(blockchainEndpointsIndexed, chainId) {
     const userRpc = blockchainEndpointsIndexed[String(chainId)];
     if (!userRpc) {
         const errorMessage = {
-            data: null,
             status: 'error',
-            message: 'Invalid chain ID passed. Please pass correct chain ID or link the endpoint to your project and try again',
-            error: 'Invalid address passed for balance query',
+            message: 'Requested endpoint not found in Dapp',
+            error: 'Requested endpoint not found in Dapp',
         };
         logError(errorMessage.message, new Error(errorMessage.error));
-        return errorMessage;
+        throw new CustomError(errorMessage, errorMessage)
     }
     const userRpcUrl = userRpc.rpcURL;
     return userRpcUrl
 }
 
 module.exports = {
-    readConfigFile,
     findAllBlockchainEndpoints,
     returnEndpointIndexedList,
     getRpcUrlforChainId,
-    CustomError
+    CustomError,
+    getDappConfig
 }

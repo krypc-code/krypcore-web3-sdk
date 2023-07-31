@@ -4,8 +4,8 @@ const { CustomError, getRpcUrlforChainId } = require("../../helpers")
 
 class Wallet extends MainInitializer {
 
-    constructor(configFilePath) {
-        super(configFilePath)
+    constructor() {
+        super()
     }
 
 

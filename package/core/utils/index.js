@@ -4,8 +4,8 @@ const { CustomError, getRpcUrlforChainId } = require("../../helpers")
 
 class Utils extends MainInitializer {
 
-    constructor(configFilePath) {
-        super(configFilePath)
+    constructor() {
+        super()
     }
 
     async resolveAddresstoENS(address) {
@@ -16,7 +16,8 @@ class Utils extends MainInitializer {
             if (!isValidAddress) {
                 throw new CustomError("Invalid address input", "Invalid address")
             }
-            const userRpcUrl = getRpcUrlforChainId(this.blockchainEndpointsIndexed, 1)
+            // const userRpcUrl = getRpcUrlforChainId(this.blockchainEndpointsIndexed, 1)
+            const userRpcUrl = "https://eth.llamarpc.com"
             if (!userRpcUrl) {
                 throw new CustomError("ETH Mainnet Endpoint Required", "Invalid endpoint")
             }

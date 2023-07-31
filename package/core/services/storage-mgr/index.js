@@ -1,11 +1,10 @@
 const MainInitializer = require("../../../main")
 const { logError, logInfo } = require("../../../logger")
-const fs = require('fs');
 
 class StorageManager extends MainInitializer {
 
-    constructor(configFilePath) {
-        super(configFilePath)
+    constructor() {
+        super()
         const storageMgrContextPath = '/api/v0/storagemanageripfs'
         this.storageMgrUrl = this.apiGatewayBaseUrl + storageMgrContextPath
     } 

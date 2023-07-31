@@ -3,8 +3,8 @@ const { logError, logInfo } = require("../../../logger")
 const { CustomError } = require("../../../helpers")
 
 class WalletManager extends MainInitializer {
-    constructor(configFilePath) {
-        super(configFilePath)
+    constructor() {
+        super()
         const walletMgrContextPath = '/api/v0/wallet'
         this.walletMgrUrl = this.apiGatewayBaseUrl + walletMgrContextPath
     }

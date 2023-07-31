@@ -5,18 +5,6 @@ const sampleAbiBase64 = Buffer.from(JSON.stringify(sampleAbi)).toString('base64'
 const sampleBytecode = require("./resources/bytecode")
 const typedData = require("./resources/typedData")
 
-// SDK Initialization
-const krypcore_web3_sdk = require("@krypc/krypcore-web3-sdk")
-const configFilePath = '../../config.json'
-const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
-const ethers = Web3Engine.wrappers.ethers
-const userRpcUrl = Web3Engine.blockchainEndpointsIndexed['80001'].rpcURL
-
-// Accessing the Core Service Methods - Kcw3 APIs
-const WalletMgrService = new Web3Engine.Services.WalletManager(configFilePath)
-
-const sampleProvider = new ethers.providers.JsonRpcProvider(userRpcUrl)
-
 async function createUnsignedTransaction(senderAddress, contractAddress, contractAbi, methodName, methodArgs, provider, msgSender) {
 
     // Get the sender's nonce
@@ -56,6 +44,19 @@ async function createUnsignedTransaction(senderAddress, contractAddress, contrac
 async function testWalletManagerMethods() {
 
     try {
+
+        // SDK Initialization
+        const krypcoreWeb3SDK = require("@krypc/krypcore-web3-sdk").default
+        const Web3Engine = await krypcoreWeb3SDK.initialize({
+            authorization: process.env.authorization,
+            dappId: process.env.dappId
+        }) 
+
+        // Accessing wrapper packages
+        const ethers = Web3Engine.wrappers.ethers
+
+        // Accessing wallet mgr service
+        const WalletMgrService = new Web3Engine.Services.WalletManager()
 
         // Sign Tx - Tx is in bytes - WIP
         // const unsignedTransaction = await createUnsignedTransaction("0xE129D672cE1B741C94f5bffcB003cDf7570Bb2B8", "0xE396a584D29036c44c138E98072341C4174778BD", sampleAbi, "mintNFT", [], sampleProvider, "0xE129D672cE1B741C94f5bffcB003cDf7570Bb2B8")

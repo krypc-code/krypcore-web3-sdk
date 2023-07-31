@@ -4,8 +4,8 @@ const { CustomError } = require("../../../helpers")
 
 class EasyNFT extends MainInitializer {
     
-    constructor(configFilePath) {
-        super(configFilePath)
+    constructor() {
+        super()
         const easyNftContextPath = '/api/v0/easy-nft'
         this.easyNfturl = this.apiGatewayBaseUrl + easyNftContextPath
     }
@@ -33,7 +33,6 @@ class EasyNFT extends MainInitializer {
                 headers: headers,
                 body: JSON.stringify(data)
             };
-            console.log(this.easyNfturl+"/"+apiMethod)
             const response = await fetch(this.easyNfturl + "/" + apiMethod, options)
             const responseData = await response.json()
             return responseData
