@@ -1,9 +1,11 @@
 # KrypCore Web3 SDK
 
-[![1.0.5](https://badge.fury.io/js/krypcore-web3-sdk.svg)](https://badge.fury.io/js/krypcore-web3-sdk)
-[![Build Status](https://travis-ci.org/krypc-code/krypcore-web3-sdk)](https://travis-ci.org/your_username/krypcore-web3-sdk)
-[![Code Coverage](https://codecov.io/gh/your_username/krypcore-web3-sdk/branch/main/graph/badge.svg)](https://codecov.io/gh/your_username/krypcore-web3-sdk)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/your_username/krypcore-web3-sdk/pulls)
+[![npm](https://img.shields.io/npm/v/@krypc/krypcore-web3-sdk)](https://www.npmjs.com/package/@krypc/krypcore-web3-sdk)
+[![npm](https://img.shields.io/npm/dt/@krypc/krypcore-web3-sdk)](https://www.npmjs.com/package/@krypc/krypcore-web3-sdk)
+[![license](https://img.shields.io/github/license/krypc-code/krypcore-web3-sdk)](https://github.com/krypc-code/krypcore-web3-sdk/blob/main/LICENSE)
+[![Build Status](https://travis-ci.com/krypc-code/krypcore-web3-sdk.svg?branch=main)](https://travis-ci.com/krypc-code/krypcore-web3-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/krypc-code/krypcore-web3-sdk/badge.svg?branch=main)](https://coveralls.io/github/krypc-code/krypcore-web3-sdk?branch=main)
+
 
 ## Description
 
