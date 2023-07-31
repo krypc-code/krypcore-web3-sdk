@@ -31,5 +31,5 @@ async function initialize(configParams) {
 
 
 
-module.exports = { Web3Engine }
+module.exports = { initialize }
 module.exports.default = {initialize}

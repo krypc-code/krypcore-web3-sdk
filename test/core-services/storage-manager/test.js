@@ -11,7 +11,7 @@ async function testStorageManagerMethods() {
         dappId: process.env.dappId
     }) 
 
-    const StorageMgrService = new Web3Engine.Services.StorageManager(configFilePath)
+    const StorageMgrService = new Web3Engine.Services.StorageManager()
 
 
     const fileStream = fs.readFileSync("./resources/test.jpeg")
