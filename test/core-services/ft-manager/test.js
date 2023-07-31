@@ -1,31 +1,37 @@
 require('dotenv').config()
-const krypcore_web3_sdk = require("@krypc/krypcore-web3-sdk")
-const configFilePath = '../../config.json'
-const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
-const ethers = Web3Engine.wrappers.ethers
-const userRpcUrl = Web3Engine.blockchainEndpointsIndexed['80001'].rpcURL
-// console.log(userRpcUrl)
-
-const FTManagerService = new Web3Engine.Services.FTManager(configFilePath)
 
 async function testFtManagerMethods() {
 
     try {
 
-        // Deploy an ERC-20 Token
-        const deployERC20tokenStatus = await FTManagerService.createERC20Token("80001", "Stacks Token", "STX", 18, "0xf782678E53d1bd5B5d23633158e0EC9504FbA8DF", 100000, process.env.WALLET_ACCESS_TOKEN)
-        console.log(deployERC20tokenStatus)
+        // SDK Initialization
+        const krypcoreWeb3SDK = require("@krypc/krypcore-web3-sdk").default
+        const Web3Engine = await krypcoreWeb3SDK.initialize({
+            authorization: process.env.authorization,
+            dappId: process.env.dappId
+        }) 
 
-        const mintERC20Status = await FTManagerService.mintERC20Token("80001", "0x6B233a8d2Fb394357c3E01d147cF52dabC7Ed75F", 10000, "0xf42Da078a8e97D399677fB19FA706deaAdDC922B", process.env.WALLET_ACCESS_TOKEN)
+
+        const FTManagerService = new Web3Engine.Services.FTManager()
+
+        // Deploy an ERC-20 Token
+        // const deployERC20tokenStatus = await FTManagerService.createERC20Token("80001", "Stacks Token", "STX", 18, "0xf782678E53d1bd5B5d23633158e0EC9504FbA8DF", 100000, process.env.WALLET_ACCESS_TOKEN)
+        // console.log(deployERC20tokenStatus)
+
+        // Mint ERC 20 Token
+        const mintERC20Status = await FTManagerService.mintERC20Token("80001", "0x9B0205B7747451B0b6F4652bF8E2ec0C93e4B503", 1000, "0xf42Da078a8e97D399677fB19FA706deaAdDC922B", process.env.WALLET_ACCESS_TOKEN)
         console.log(mintERC20Status)
 
-        const totalSupplyStatus = await FTManagerService.getTotalSupply("80001","0x6B233a8d2Fb394357c3E01d147cF52dabC7Ed75F")
+        // Get total supply of ERC 20 Token
+        const totalSupplyStatus = await FTManagerService.getTotalSupply("80001","0x9B0205B7747451B0b6F4652bF8E2ec0C93e4B503")
         console.log(totalSupplyStatus)
 
-        const transferERC20Status = await FTManagerService.transferERC20("80001", "0x6B233a8d2Fb394357c3E01d147cF52dabC7Ed75F", 100, "0xf782678E53d1bd5B5d23633158e0EC9504FbA8DF", process.env.WALLET_ACCESS_TOKEN)
+        // Transfer ERC 20 Token
+        const transferERC20Status = await FTManagerService.transferERC20("80001", "0x9B0205B7747451B0b6F4652bF8E2ec0C93e4B503", 100, "0xf782678E53d1bd5B5d23633158e0EC9504FbA8DF", process.env.WALLET_ACCESS_TOKEN)
         console.log(transferERC20Status)
 
-        const approveFTSStatus = await FTManagerService.approveERC20("80001", "0x6B233a8d2Fb394357c3E01d147cF52dabC7Ed75F", 100, "0xf782678E53d1bd5B5d23633158e0EC9504FbA8DF", process.env.WALLET_ACCESS_TOKEN)
+        // Approve ERC 20 Token
+        const approveFTSStatus = await FTManagerService.approveERC20("80001", "0x9B0205B7747451B0b6F4652bF8E2ec0C93e4B503", 100, "0xf782678E53d1bd5B5d23633158e0EC9504FbA8DF", process.env.WALLET_ACCESS_TOKEN)
         console.log(approveFTSStatus)
 
     }

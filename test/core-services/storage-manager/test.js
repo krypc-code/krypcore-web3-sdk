@@ -2,15 +2,16 @@
 const fs = require('fs');
 require('dotenv').config()
 
-// SDK Initialization
-const krypcore_web3_sdk = require("@krypc/krypcore-web3-sdk")
-const configFilePath = '../../config.json'
-
-const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
-
-const StorageMgrService = new Web3Engine.Services.StorageManager(configFilePath)
-
 async function testStorageManagerMethods() {
+
+    // Init SDK
+    const krypcoreWeb3SDK = require("@krypc/krypcore-web3-sdk").default
+    const Web3Engine = await krypcoreWeb3SDK.initialize({
+        authorization: process.env.authorization,
+        dappId: process.env.dappId
+    }) 
+
+    const StorageMgrService = new Web3Engine.Services.StorageManager(configFilePath)
 
 
     const fileStream = fs.readFileSync("./resources/test.jpeg")

@@ -4,8 +4,8 @@ const { CustomError } = require("../../../helpers")
 
 class DidManager extends MainInitializer {
 
-    constructor(configFilePath) {
-        super(configFilePath)
+    constructor() {
+        super()
         const DidMgrContextPath = '/api/v0/did'
         this.DidMgrUrl = this.apiGatewayBaseUrl + DidMgrContextPath
     }
@@ -23,7 +23,6 @@ class DidManager extends MainInitializer {
                 issuerDescription: issuerDescription,
                 issuerDesignation: issuerDesignation,
                 method: method
-
             }
             const options = {
                 method: 'POST',

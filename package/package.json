@@ -28,7 +28,6 @@
     "@hashgraph/hethers": "^1.2.2",
     "@walletconnect/web3-provider": "^1.8.0",
     "ethers": "^5.7.1",
-    "fs": "^0.0.1-security",
     "ipfs-http-client": "^50.1.2",
     "web3modal": "1.9.5",
     "winston": "^3.9.0"

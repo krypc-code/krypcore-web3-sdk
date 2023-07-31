@@ -1,15 +1,15 @@
-// Other Necessary Items
 require('dotenv').config()
 
-// SDK Initialization
-const krypcore_web3_sdk = require("krypcore-web3-sdk")
-const configFilePath = '../../config.json'
-const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
-
-// Accessing the Core Service Methods - Kcw3 APIs
-const DidManagerService = new Web3Engine.Services.DidManager(configFilePath)
 
 async function testDidManagerMethods() {
+
+    const krypcoreWeb3SDK = require("@krypc/krypcore-web3-sdk").default
+    const Web3Engine = await krypcoreWeb3SDK.initialize({
+        authorization: process.env.authorization,
+        dappId: process.env.dappId
+    }) 
+
+    const DidManagerService = new Web3Engine.Services.DidManager()
 
     // Create issuer profile
     const issuerProfileCreationStatus = await DidManagerService.createIssuerProfile("Bharathq", "Hello", "Desig", "key")
@@ -50,9 +50,6 @@ async function testDidManagerMethods() {
     // list vc templates
     const listVcTemplatesStatus = await DidManagerService.listVCTemplates()
     console.log(listVcTemplatesStatus)
-
-
-
 }
 
 testDidManagerMethods()

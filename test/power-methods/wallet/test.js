@@ -1,14 +1,19 @@
 require('dotenv').config()
 
-// SDK Initialization
-const krypcore_web3_sdk = require("@krypc/krypcore-web3-sdk")
-const configFilePath = '../../config.json'
-const Web3Engine = new krypcore_web3_sdk.Web3Engine(configFilePath)
-const ethers = Web3Engine.wrappers.ethers
 
 // Accessing SDK Power Methods
 async function testPowerMethods() {
     try {
+
+        // SDK Initialization
+        const krypcoreWeb3SDK = require("@krypc/krypcore-web3-sdk").default
+        const Web3Engine = await krypcoreWeb3SDK.initialize({
+            authorization: process.env.authorization,
+            dappId: process.env.dappId
+        }) 
+
+        const ethers = Web3Engine.wrappers.ethers
+
         // Get balance power method
         const balance = await Web3Engine.Wallet.getBalance("0xE6D5514b8De7ef9E5F5c4cc2E8cA0207129DEB65", 80001)
         console.log(balance)
@@ -40,7 +45,7 @@ async function testPowerMethods() {
 
     }
     catch(error){
-        console.error(JSON.stringify(error))
+        console.error(error)
     }
 }
 
