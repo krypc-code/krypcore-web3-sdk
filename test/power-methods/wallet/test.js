@@ -41,8 +41,6 @@ async function testPowerMethods() {
 
         const txHash = await Web3Engine.Wallet.transfer("0xE6D5514b8De7ef9E5F5c4cc2E8cA0207129DEB65", "10")
         console.log(txHash)
-
-
     }
     catch(error){
         console.error(error)
