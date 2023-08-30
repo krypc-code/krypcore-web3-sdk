@@ -9,3 +9,4 @@ test/config.json
 test/config.json
 package/package-lock.json
 package/package-lock.json
+examples/connect-wallet-example/package-lock.json

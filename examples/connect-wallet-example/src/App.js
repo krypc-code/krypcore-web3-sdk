@@ -27,12 +27,18 @@ function App() {
 
   async function initialize() {
 
-    const Web3Engine = await sdk.initialize({
-      authorization: process.env.REACT_APP_AUTH,
-      dappId: process.env.REACT_APP_DAPPID
-  }) 
+    try {
+      const Web3Engine = await sdk.initialize({
+        authorization: process.env.REACT_APP_AUTH,
+        dappId: process.env.REACT_APP_DAPPID
+    }) 
+    setWeb3Engine(Web3Engine)
 
-  setWeb3Engine(Web3Engine)
+    }
+    catch(err) {
+      console.error("SDK Initialization failed: ", err)
+    }
+
   
   }
 
