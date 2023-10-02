@@ -9,7 +9,7 @@ class MainInitializer {
       // Initializing the sdk from the config file.
       // var config = readConfigFile(configFilePath);
       MainInitializer.configData = configData
-      MainInitializer.apiGatewayBaseUrl = 'https://api-beta.krypcore.com'
+      MainInitializer.apiGatewayBaseUrl = 'https://api.krypcore.com'
       const blockchainEndpoints = findAllBlockchainEndpoints(configData.endpoints);
       const blockchainEndpointsIndexed = returnEndpointIndexedList(blockchainEndpoints);
       MainInitializer.userAuthKey = configData.token;
@@ -46,7 +46,7 @@ class MainInitializer {
 
     const configData =  MainInitializer.configData
     this.configData = configData
-    this.apiGatewayBaseUrl = 'https://api-beta.krypcore.com'
+    this.apiGatewayBaseUrl = 'https://api.krypcore.com'
     const blockchainEndpoints = findAllBlockchainEndpoints(configData.endpoints);
     const blockchainEndpointsIndexed = returnEndpointIndexedList(blockchainEndpoints);
     this.userAuthKey = configData.token;

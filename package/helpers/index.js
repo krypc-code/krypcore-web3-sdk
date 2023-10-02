@@ -10,7 +10,7 @@ class CustomError extends Error {
 }
 
 async function getDappConfig(userAuthKey, dappId){
-    const apiGatewayBaseUrl  = 'https://api-beta.krypcore.com'
+    const apiGatewayBaseUrl  = 'https://api.krypcore.com'
     try {
         const apiMethod = 'findMyProject'
         const headers = {
